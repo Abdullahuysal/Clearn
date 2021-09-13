@@ -1,0 +1,98 @@
+﻿@model Clearn.Models.UserData
+@{
+    ViewBag.Title = "Loginpage";
+    Layout = "~/Views/Shared/_LayoutPage2.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<meta charset="utf-8">
+<style>
+    body {
+        font-family: 'Titillium Web', sans-serif;
+        background-image: url("../Image/Background.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .form {
+        background: #13232f;
+        padding: 5px;
+        max-width: 500px;
+        height:500px;
+        margin: 300px auto;
+        border-radius: 4px;
+        box-shadow: 0 4px 10px 4px #13232f;
+        opacity: 0.9;
+    }
+    h1 {
+        text-align: center;
+        color: #ffffff;
+        font-weight: 300;
+        margin: 0 0 40px;
+        padding-top:20px;
+    }
+    .text_box {
+        font-size: 22px;
+        display: block;
+        width: 100%;
+        height: 50px;
+        padding: 40px 10px;
+        margin-top: 5px;
+        background: none;
+        background-image: none;
+        border: 1px solid #a0b3b0;
+        color: #ffffff;
+        border-radius: 0;
+        transition: border-color .25s ease, box-shadow .25s ease;
+    }
+    .submit-button {
+        border: 0;
+        outline: none;
+        border-radius: 0;
+        padding: 15px 0;
+        font-size: 2rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        background: #1ab188;
+        color: #ffffff;
+        display: block;
+        width: 100%;
+    }
+    .error {
+        color:whitesmoke;
+    }
+   
+    
+
+</style>
+@using (Html.BeginForm())
+{
+
+    <div class="login-box form">
+        <div class="Login">
+            <h1>Clea<span style="color:#1ab188">r</span>n Giriş Yap</h1>
+
+            
+            <div class="error">
+                @ViewBag.error
+            </div>
+           
+
+            @Html.TextBoxFor(x => x.UserEmail, new { @class = "text_box", placeholder = "e-mail adresiniz(@gmail.com)", name = "UserEmail" })
+
+            @Html.TextBoxFor(x => x.UserPassword, new { @class = "text_box", placeholder = "Şifreniz", @type = "password", name = "UserPassword" })
+
+
+
+            <input type="submit" value="Giriş Yap" class="submit-button" />
+                
+
+        </div>
+
+     
+
+    </div>
+    
+}
+
+

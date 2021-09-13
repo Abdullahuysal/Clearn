@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddWord</title>
+    <style>
+        body {
+            background-color: #1ab188
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 20px 40px;
+                margin-left: 50px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                    color: white;
+                }
+
+        .UserHomeFont {
+            margin-left: 100px;
+            margin-top: 200px;
+            color: whitesmoke;
+            font-size: 30px;
+        }
+
+        .mybtn {
+            position: absolute;
+            color: whitesmoke;
+            background-color: #333;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 800px;
+            width: 80px;
+            margin-top: 30px;
+        }
+        .mybtn1 {
+            position: absolute;
+            color: whitesmoke;
+            background-color: #333;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 50px;
+            width: 80px;
+            margin-top: 30px
+        }
+        .content{
+            max-width:300px;
+            margin:auto;
+            margin-top:50px;
+            padding:80px;
+         
+        }
+        h1{
+            margin-top:50px;
+            margin-left:700px;
+            font-size:20px;
+        }
+        .text_box {
+            font-size: 22px;
+            display: block;
+            width: 250px;
+            height: 50px;
+            padding: 10px 5px;
+            margin-top: 5px;
+            background: none;
+            background-image: none;
+            border: 1px solid #a0b3b0;
+            color: #ffffff;
+            border-radius: 0;
+            transition: border-color .25s ease, box-shadow .25s ease;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="active" href="@Url.Action("Userpage","Home")">CLEA<span style="color:#1ab188">R</span>N</a></li>
+            <li><a href="@Url.Action("AddWord","Home")">KELİME EKLE</a></li>
+            <li><a href="@Url.Action("About","Home")">HAKKIMIZDA</a></li>
+
+            @Html.ActionLink("Çıkış yap", "LogOut", "Home", new { onclick = "logout()" }, new { @class = "mybtn" })
+
+        </ul>
+
+    </nav>
+    <h1>Bize Kelime Önerisinde Bulunmak İster Misin?</h1>
+    <div class="content">
+        @Html.TextBox("Word", "", new { @class = "text_box", @id = "Word" })
+        @Html.TextBox("Mean", "", new { @class = "text_box" ,@id="mean"})
+        @*@Html.ActionLink("Kelime Ekle", "AddWord", "Home", new { onclick = "Add()" }, new { @class = "mybtn1" })*@
+        <button class="mybtn1" onclick="Add()">Kelime Öner!</button>
+    </div>
+    <script>
+        var oneri = new Array()
+        var word = document.getElementById("Word").value;
+        var Mean = document.getElementById("mean").innerHTML;
+        function Add() {
+            
+            oneri.push(word);
+            oneri.push(Mean);
+            alert("Kelime Önerisinde bulunduğun için teşekkürler")
+        }
+    </script>
+</body>
+</html>

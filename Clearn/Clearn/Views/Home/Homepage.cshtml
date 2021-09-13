@@ -1,0 +1,61 @@
+﻿@model Clearn.Models.UserData
+@{
+    ViewBag.Title = "Homepage";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+<div>
+    @if (ViewBag.Result != null)
+    {
+        if (ViewBag.Status == "success")
+        {
+            <div class="alert alert-success myalert" role="alert">@ViewBag.Result</div>
+        }
+        if (ViewBag.Status == "danger")
+        {
+            <div class="alert alert-danger myalert" role="alert">@ViewBag.Result</div>
+        }
+
+    }
+</div>
+
+
+<div class="login-form">
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="login-box form">
+            <div class="Signup">
+                <h1>Clea<span style="color:#1ab188">r</span>n Kayıt Ol</h1>
+
+               
+                @Html.ValidationSummary(false,null,new {@class="myvalidation"})
+
+                @Html.TextBoxFor(x => x.UserFirstName, new { @class = "text_box", placeholder = "Adınız" })
+
+                @Html.TextBoxFor(x => x.UserSecondName, new { @class = "text_box", placeholder = "Soyadınız" })
+
+                @Html.TextBoxFor(x => x.UserEmail, new { @class = "text_box", placeholder = "e-mail adresiniz(@gmail.com)" })
+
+                @Html.TextBoxFor(x => x.UserPassword, new { @class = "text_box", placeholder = "Şifreniz", @type = "password" })
+
+                <input type="submit" value="Kaydol" class="submit-button" />
+                <div class="or"> Hesabın varsa</div>
+                <div>
+                    @Html.ActionLink("Giriş yap", "Loginpage", "Home", null, new { @class = "Link" })
+                </div>
+
+            </div>
+        </div>
+    }
+ 
+
+</div>
+
+
+
+
+
+

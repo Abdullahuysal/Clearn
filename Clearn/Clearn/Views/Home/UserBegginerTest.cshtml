@@ -1,0 +1,290 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UserBegginerTest</title>
+    <meta charset="utf-8">
+    
+</head>
+<body>
+    <style>
+        body {
+            background-color: #1ab188;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 20px 40px;
+                margin-left: 50px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+
+        .canvas {
+            margin: auto;
+            margin-top: 200px;
+            width: 1200px;
+            height: 600px;
+            border: 1px solid #1ab188;
+            background-color: whitesmoke;
+            box-shadow:0 0 10px 2px;
+        }
+
+        .StartButton {
+            position: absolute;
+            margin-top: 100px;
+            margin-left: 20%;
+            background-color: whitesmoke;
+            color: #1ab188;
+            font-size: 40px;
+        }
+
+        .mybtn {
+            position: absolute;
+            color: #333;
+          
+            text-align: center;
+            text-decoration: none;
+            margin-left: 20px;
+            width: 80px;
+            margin-left: 900px;
+            margin-top: 30px;
+        }
+
+        .mybtn:hover {
+                background-color: #1ab188;
+                color: whitesmoke;
+         }
+
+        .container {
+            display: inline-block;
+            justify-content: space-between;
+            padding: 100px 50px 0px 100px 
+        }
+        #count{
+            display:inline;
+        }
+        .question{
+            display:block;
+            margin-left:40%;
+        }
+        .btn {
+            border: 4px solid #1ab188;
+            color: #333;
+            background-color:whitesmoke;
+            outline: none;
+            width: 200px;
+            height: 100px;
+           
+        }
+        .buttons {
+            margin: 10px 20px 10px 20px;
+            padding: 80px;
+        }
+        .btn:hover {
+            color: whitesmoke;
+            background-color: #333;
+        }
+        .hide{
+            display:none;
+        }
+    </style>
+    <nav>
+        <ul>
+            <li><a class="active" href="#home">CLEA<span style="color:#1ab188">R</span>N</a></li>
+            <li><a href="#addword">KELİME EKLE</a></li>
+            <li><a href="#contact">HAKKIMIZDA</a></li>
+            @Html.ActionLink("Çıkış yap", "LogOut", null, new { @class = "mybtn" })
+
+        </ul>
+
+    </nav>
+
+    @ViewBag.Categori
+
+
+
+
+    <div class="canvas">
+        <button class="StartButton" id="StartButton">TESTİ BAŞLAT</button>
+        <div >
+            <h1 id="count">15</h1>
+        </div>
+        <div id="question-container" class="hide container">
+            <div id="question" class="question">Soru</div>
+            <div id="answer-buttons" class="buttons" >
+                <button class="btn" id="answer0" onclick="check(this)">Cevap 1</button>
+                <button class="btn" id="answer1" onclick="check(this)">Cevap 2</button>
+                <button class="btn" id="answer2" onclick="check(this)">Cevap 3</button>
+                <button class="btn" id="answer3" onclick="check(this)">Cevap 4</button>
+            </div>
+        </div>
+    </div>
+
+
+   
+    <script>
+
+
+        const startbuton = document.getElementById("StartButton");
+        const questionContainerElement = document.getElementById("question-container");
+        startbuton.addEventListener("click", StartTest)
+        var timer = 15;
+        const Words = new Array();
+        var Question = new Array();
+        var soruadet = 10;
+        var correctanswer;
+        var interval;
+       
+
+            @foreach (var d in Model)
+            {
+
+            @:Words.push({ "WordId":"@d.WordId","Word": "@d.Word", "Mean": "@d.Meaning" });
+
+            };
+
+     
+           
+
+        function check(element) {
+            if (element.innerHTML == correctanswer) {
+                element.style.backgroundColor = "green";
+                clearInterval(interval);
+                setTimeout(function () {
+                    StartTest();
+                    element.style.backgroundColor = "whitesmoke";
+                    element.style.color = "#333";
+                    
+
+                }, 2000)
+               
+               
+                
+            }
+            else {
+                element.style.backgroundColor = "red";
+                clearInterval(interval);
+                setTimeout(function () {
+                    StartTest();
+
+                    element.style.backgroundColor = "whitesmoke";
+                    element.style.color = "#333";
+                }, 2000)
+               
+                
+            }
+
+           
+        }
+
+
+        function GetQuestion() {
+            var a = Math.floor(Math.random() * 101);
+            var soru = Words[a].Word;
+            var cevap = Words[a].Mean;
+            var yanlıscevaplar = new Array();
+            var iterasyon = 0;
+            soruadet--;
+            for (var i = 0; i < 100; i++) {
+                var b = Math.floor(Math.random() * 101);
+                if (a != b) {
+                    yanlıscevaplar.push(Words[b].Mean);
+                    iterasyon++;
+
+                }
+                
+                if (iterasyon == 3) {
+                    break;
+                }
+            }
+            yanlıscevaplar.push(cevap);
+            MixQuestion(soru, cevap, yanlıscevaplar);
+            
+        }
+
+        function MixQuestion(soru, cevap, yanlıscevaplar) {
+            var list = [];
+            list = shuffle();
+            correctanswer = cevap;
+            document.getElementById("question").innerHTML = soru;
+            document.getElementById("answer0").innerHTML = yanlıscevaplar[list[0]];
+            document.getElementById("answer1").innerHTML = yanlıscevaplar[list[1]];
+            document.getElementById("answer2").innerHTML = yanlıscevaplar[list[2]];
+            document.getElementById("answer3").innerHTML = yanlıscevaplar[list[3]];
+         
+        }
+        function shuffle() {
+            var List = [0, 1, 2, 3];
+            return List.sort(() => Math.random() - 0.5);
+
+        }
+
+        function StartTest() {
+        timer = 15;
+       GetQuestion();
+       startbuton.classList.add("hide");
+       interval=setInterval(function () {
+       timer--;
+       if (timer > 0) {
+       id = document.getElementById("count");
+       id.innerHTML = timer;
+           soruadet--;
+        
+
+
+       }
+       if (timer == 0) {
+       
+          
+         
+           if (soruadet == 0) {
+               id.innerHTML = "Bitti";
+               questionContainerElement.classList.add("hide")
+           }
+           else {
+               clearInterval(interval);
+               StartTest();
+               
+           }
+
+       }
+       }, 1000);
+
+       
+       questionContainerElement.classList.remove("hide")
+       
+
+               
+        }
+      
+
+
+
+
+    </script>
+</body>
+</html>

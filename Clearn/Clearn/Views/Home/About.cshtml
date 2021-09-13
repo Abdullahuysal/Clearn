@@ -1,0 +1,77 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+    <style>
+        body{
+            background-color:#1ab188
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 20px 40px;
+        margin-left: 50px;
+        text-decoration: none;}
+
+        li a:hover {
+        background-color: #111;
+        color: white;
+        }
+        .UserHomeFont {
+            margin-left: 100px;
+            margin-top: 200px;
+            color:whitesmoke;
+            font-size: 30px;
+        }
+        .mybtn {
+            position: absolute;
+            color: whitesmoke;
+            background-color: #333;
+            text-align: center;
+            text-decoration: none;
+            margin-left: 800px;
+            width: 80px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <nav>
+            <ul>
+                <li><a class="active" href="">CLEA<span style="color:#1ab188">R</span>N</a></li>
+                <li><a href="@Url.Action("AddWord","Home")">KELİME EKLE</a></li>
+                <li><a href="@Url.Action("About","Home")">HAKKIMIZDA</a></li>
+
+                @Html.ActionLink("Çıkış yap", "LogOut", "Home", new { onclick = "logout()" }, new { @class = "mybtn" })
+
+            </ul>
+
+        </nav>
+    </div>
+
+    <div class="UserHomeFont">
+        <h1>17-155-051  ABDULLAH  UYSAL 2021 YAZ STAJ PROJE ÖDEVİ</h1>
+    </div>
+</body>
+</html>

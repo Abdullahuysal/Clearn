@@ -1,0 +1,149 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Userpage</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <style>
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+        li {
+            float: left;
+         }
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 20px 40px;
+            margin-left:50px;
+            text-decoration: none;
+                }
+
+        li a:hover {
+         background-color: #111;
+         color:white;
+
+              }
+        .user {
+         color: whitesmoke;
+         background-color: #1ab188;
+         margin-left:800px;
+         }
+        .col {
+         margin: 20px;
+         margin-top: 100px;
+         width:45%;
+          }
+        .Link {
+                display: block;
+                border: 0;
+                text-decoration: none;
+                border-radius: 0;
+                margin-top: 0px;
+                padding-left: 20px;
+                font-size: 2rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                text-align: center;
+                background: #1ab188;
+                color: #ffffff;
+                width: 400px;
+            }
+
+            .UserHomeFont {
+                margin-left:100px;
+                margin-top: 200px;
+                color:#1ab188;
+                font-size:30px;
+            }
+            .mybtn {
+                position: absolute;
+                color: whitesmoke;
+                background-color: #333;
+                text-align: center;
+                text-decoration: none;
+                margin-left: 20px;
+                width: 80px;
+               
+                margin-top: 30px;
+            }
+            .mybtn:hover{
+                background-color:#1ab188;
+                color:whitesmoke;
+            }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a class="active" href="">CLEA<span style="color:#1ab188">R</span>N</a></li>
+            <li><a href="@Url.Action("AddWord","Home")">KELİME EKLE</a></li>
+            <li><a href="@Url.Action("About","Home")">HAKKIMIZDA</a></li>
+          
+            <li><a href="User" class="user">@ViewBag.UserFirstName</a></li>
+            @Html.ActionLink("Çıkış yap", "LogOut", "Home",new {onclick="logout()"}, new { @class = "mybtn"})
+            
+        </ul>
+
+    </nav>
+    <div class="UserHomeFont">
+        Clearn'e Hoşgeldin @ViewBag.UserFirstName İstediğin Düzeyde Testi Seçerek Kelime Öğrenmeye Başlayabilirsin.
+    </div>
+  
+    <div>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card">
+
+                    <div class="card-body">
+                        <h5 class="card-title">Başlangıç Seviye Kelimeler</h5>
+                        <p class="card-text">Bu test başlangıç seviyesi düzeyinde ingilizce kelimeler öğrenmek içindir</p>
+                        @Html.ActionLink("Teste Git", "UserBegginerTest", "Home", new { categori = "Beginner" }, new { @class = "Link" })
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Başlangıç-Orta Seviye Kelimeler</h5>
+                        <p class="card-text">Bu test başlangıç-orta seviyesi düzeyinde ingilizce kelimeler öğrenmek içindir</p>
+                        @Html.ActionLink("Teste Git", "UserBegginerTest", "Home", new { categori = "Intermediate" }, new { @class = "Link" })
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Orta-İleri Seviye Kelimeler</h5>
+                        <p class="card-text">Bu test orta-ileri seviyesi düzeyinde ingilizce kelimeler öğrenmek içindir</p>
+                        @Html.ActionLink("Teste Git", "UserBegginerTest", "Home", new { categori = "Advanced" }, new { @class = "Link" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script>
+        var UserEmail = '@ViewBag.UserEmail'
+        var UserFirstName = '@ViewBag.UserFirstName'
+        var UserSecondName = '@ViewBag.UserSecondName'
+
+        localStorage.setItem("UserEmail", UserEmail)
+        localStorage.setItem("UserFirstName", UserFirstName)
+        localStorage.setItem("UserSecondName", UserSecondName)
+
+        function logout() {
+            localStorage.clear();
+        }
+    </script>
+</body>
+</html>
